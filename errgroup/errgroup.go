@@ -17,7 +17,7 @@ func (g *group) Go(fn func() error) {
 	g.wg.Add(1)
 
 	go func() {
-		g.wg.Done()
+		defer g.wg.Done()
 
 		if err := fn(); err != nil {
 			g.errOnce.Do(func() {
